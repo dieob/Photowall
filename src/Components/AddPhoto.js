@@ -6,10 +6,13 @@ class AddPhoto extends Component{
         return (
         <div>
                 <h1>Photowall </h1>
-                <form>
-                    <input type="text" placeholder="Link"></input>
-                    <input type="text" placeholder="Description"></input>
-                </form>
+                <div className="form">
+                    <form>
+                        <input type="text" placeholder="Link"></input>
+                        <input type="text" placeholder="Description"></input>
+                        <button> Post </button>
+                    </form>
+                </div>
         </div>
         )
     }
