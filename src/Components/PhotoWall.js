@@ -1,22 +1,20 @@
-import React, {Component} from 'react'
+import React from 'react'
 import Photo from './Photo'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 
-class PhotoWall extends Component{
-    render(){
+function PhotoWall(props){
         return (
             <div>
                 <Link className="addIcon" to="/AddPhoto">  </Link>
                 <div className="photoGrid">
-                    {this.props.posts
+                    {props.posts
                     .sort(function(x,y){
                         return y.id - x.id
                     })
-                    .map((post, index) => <Photo key={post.id}post = {post} onRemovePhoto={this.props.onRemovePhoto}/>)}
+                    .map((post, index) => <Photo key={post.id}post = {post} {...props}/>)}
                 </div>
-            </div>)
-    }
+        </div> )
 }
 
 //To indicate required props and their types
