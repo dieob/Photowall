@@ -22,7 +22,6 @@ class PhotoWall extends Component{
 //To indicate required props and their types
 PhotoWall.propTypes = {
     posts: PropTypes.array.isRequired,
-    onRemovePhoto: PropTypes.func.isRequired
 }
 
 export default PhotoWall
