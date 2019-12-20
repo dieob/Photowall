@@ -10,9 +10,6 @@ class Main extends Component{
     constructor (){
         super()
     }
-    componentDidMount(){
-        this.props.removePost(1)
-    }
     render(){
         console.log(this.props)
         return (
@@ -23,12 +20,9 @@ class Main extends Component{
                         <PhotoWall {...this.props}/>
                     </div>
                 )} />
-                 {/* <Route path='/AddPhoto' render = {({history}) => (
-                        <AddPhoto onAddPhoto= {(addedPost)=>{
-                            this.addPhoto(addedPost)
-                            history.push('/')
-                        }}/>
-                 )}/> */}
+                 <Route path='/AddPhoto' render = {({history}) => (
+                        <AddPhoto {...this.props} onHistory={history}/>
+                 )}/>
             </div>)
     }
 
