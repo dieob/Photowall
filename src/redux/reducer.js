@@ -10,4 +10,4 @@ const postReducer = function posts(state = postes, action) {
     }
 }
 
-export default postReducer
+export default postReducer 
