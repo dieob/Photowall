@@ -18,8 +18,8 @@ function comments(state={}, action){
 
 
 function posts(state = _posts, action) {
-
     switch(action.type){
+        case 'LOAD_POSTS': return action.posts
         case 'REMOVE_POST': return [...state.slice(0, action.index), ...state.slice(action.index+1)]
         case 'ADD_POST': return [...state, action.post]
         default: return state
