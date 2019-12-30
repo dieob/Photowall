@@ -18,6 +18,8 @@ export function startLoadingPost(){
                 posts.push(childSnapshot.val())
             })
             dispatch(loadPosts(posts))
+        }).catch((error)=>{
+            console.log(error)
         })
     }
 }
@@ -29,13 +31,52 @@ export function loadPosts(posts){
     }
 }
 
-export function startRemovingPost(index, id){
+export function startRemovingPost(index, id) {
+ 
+    const updates = {
+     [`posts/${id}`]: null,
+     [`comments/${id}`]: null
+    }
+     
+     return (dispatch) => {
+     return database.ref().update(updates).then(() => {
+     dispatch(removePost(index))
+     }).catch((error) => {
+     console.log(error)
+     })
+     }
+    }
+
+export function startAddingComment(comment, postId){
     return ((dispatch)=>{
-        return database.ref(`posts/${id}`).remove().then(()=>{
-            dispatch(removePost(index))
+        return database.ref('comments/'+postId).push(comment).then(()=>{
+            dispatch(addComment(comment, postId))
+        }).catch((error)=>{
+            console.log(error)
         })
     })
 }
+
+export function startLoadingComments(){
+    return (dispatch) => {
+        return database.ref('comments').once('value').then((snapshot)=>{
+            let comments = {}
+            snapshot.forEach((childSnapshot) => {
+                comments[childSnapshot.key] = Object.values(childSnapshot.val())
+            })
+            dispatch(loadComments(comments))
+        }) 
+    }
+}
+
+export function loadComments(comments) {
+    return {
+        type: 'LOAD_COMMENTS',
+        comments
+    }
+}
+
+
 
 //remove
 export function removePost(index){
